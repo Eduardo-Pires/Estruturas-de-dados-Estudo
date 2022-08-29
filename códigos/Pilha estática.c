@@ -43,7 +43,7 @@ Stack *createStack()
 
 bool isFull(Stack *stk)
 {
-    if(stk->numElem == MAX)
+    if(stk->numElem >= MAX)
     {
         return true;
     }
@@ -55,7 +55,7 @@ bool isFull(Stack *stk)
 
 bool isEmpty(Stack *stk)
 {
-    if(stk->numElem == -1)
+    if(stk->numElem <= -1)
     {
         return true;
     }
