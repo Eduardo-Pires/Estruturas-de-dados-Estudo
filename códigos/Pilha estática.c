@@ -23,8 +23,8 @@ bool isFull(Stack *stk);
 bool isEmpty(Stack *stk);
 void push(Stack *stk, char elem, bool *ok);
 void pop(Stack *stk, char *elem, bool *ok);
-void showAll(Stack *stk);
-void showTop(Stack *stk);
+void showAll(Stack *stk, bool *ok);
+char getTop(Stack *stk, bool *ok);
 void obliterate(Stack *stk);
 
  //Funções
@@ -103,20 +103,37 @@ void obliterate(Stack *stk)
     }
 }
 
-void showAll(Stack *stk)
+void showAll(Stack *stk, bool *ok)
 {
-    int elem = 0;
-    while(elem != stk->numElem+1)
+    if(stk == NULL || stk->numElem == -1)
     {
-        printf("%c ", stk->elem[elem]);
-        elem++;
+        *ok = false;
     }
-    printf("\n");
+    else
+    {
+        *ok = true;
+        int elem = 0;
+        while(elem != stk->numElem+1)
+        {
+            printf("%c ", stk->elem[elem]);
+            elem++;
+        }
+        printf("\n");
+    }
+
 }
 
-void showTop(Stack *stk)
+char getTop(Stack *stk, bool *ok)
 {
-    printf("%c\n", stk->top);
+    if(stk == NULL || stk->numElem == -1)
+    {
+        *ok = false;
+    }
+    else
+    {
+        *ok = true;
+        return stk->top;
+    }
 }
 
 
@@ -128,22 +145,25 @@ int main()
     Stack *pilha;
     pilha = createStack();
 
+    pop(pilha, &retirado, &ok);
+    printf("print error in operation: %d\n", ok);
+
     push(pilha, 'a', &ok);
     push(pilha, 'b', &ok);
     push(pilha, 'c', &ok);
     printf("push 3 elements: ");
-    showAll(pilha);
+    showAll(pilha, &ok);
 
     pop(pilha, &retirado, &ok);
     printf("pop 1 element: ");
-    showAll(pilha);
+    showAll(pilha, &ok);
 
     push(pilha, 'd', &ok);
     printf("push 1 element: ");
-    showAll(pilha);
+    showAll(pilha, &ok);
 
-    printf("top of the list: ");
-    showTop(pilha);
+    printf("top of the list: %c\n", getTop(pilha, &ok));
+    printf("print success in operation: %d\n", ok);
 
     obliterate(pilha);
 
