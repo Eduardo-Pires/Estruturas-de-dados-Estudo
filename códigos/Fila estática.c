@@ -93,7 +93,7 @@ void dequeue(Queue *queue, char *elem, bool *ok)
         elem = queue->front;
         while(queue->elements[queue->numElem] != qAux->elements[queue->numElem - 1])
         {
-                qAux->elements[i-1] = queue->elements[i];
+            qAux->elements[i-1] = queue->elements[i];
 
             i++;
         }
@@ -101,6 +101,7 @@ void dequeue(Queue *queue, char *elem, bool *ok)
         qAux->numElem = queue->numElem - 1;
         qAux->back = queue->elements[qAux->numElem];
         qAux->front= qAux->elements[0];
+
 
         queue = qAux;
         eliminate(qAux);
@@ -110,7 +111,7 @@ void dequeue(Queue *queue, char *elem, bool *ok)
 void showAll(Queue *queue)
 {
     int i = 0;
-    while(i < queue->numElem)
+    while(i <= queue->numElem)
     {
         printf("%c ", queue->elements[i]);
         i++;
@@ -131,9 +132,13 @@ int main()
     enqueue(fila, 'c', &ok);
     enqueue(fila, 'd', &ok);
 
+    printf("%c\n", fila->front);
+    printf("%c\n", fila->back);
     showAll(fila);
 
     dequeue(fila, &elem, &ok);
+    printf("%c\n", fila->front);
+    printf("%c\n", fila->back);
 
     showAll(fila);
 
