@@ -86,25 +86,12 @@ void dequeue(Queue *queue, char *elem, bool *ok)
     }
     else
     {
-        int i = 1;
-        Queue *qAux;
-        qAux = createQueue();
-
-        elem = queue->front;
-        while(queue->elements[queue->numElem] != qAux->elements[queue->numElem - 1])
-        {
-            qAux->elements[i-1] = queue->elements[i];
-
-            i++;
-        }
-
-        qAux->numElem = queue->numElem - 1;
-        qAux->back = queue->elements[qAux->numElem];
-        qAux->front= qAux->elements[0];
+       queue->numElem = queue->numElem - 1;
+       queue->back = queue->elements[queue->numElem];
 
 
-        queue = qAux;
-        eliminate(qAux);
+
+
     }
 }
 
